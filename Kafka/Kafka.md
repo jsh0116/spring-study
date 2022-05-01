@@ -76,8 +76,6 @@
 
 ![image](https://user-images.githubusercontent.com/62865808/166153510-934454bc-83ba-4602-b938-e508770b89df.png)
 
-[Apache Kafka란?](https://velog.io/@jaehyeong/Apache-Kafka%EC%95%84%ED%8C%8C%EC%B9%98-%EC%B9%B4%ED%94%84%EC%B9%B4%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80)
-
 ### Partition
 * Topic을 구성하는 데이터 저장소이며 message가 저장되는 위치이다.
 * 여러개의 Producer에서 한개의 partition으로 message를 보낼 경우 병목 현상이 발생하고, message의 순서를 보장할 수 없게 된다.
@@ -91,3 +89,48 @@
   * partition 수를 줄이는 것은 불가능하다.
     * Kafka에서 partition 수를 늘리는 것은 아무때나 가능하지만 partition 수를 줄이는 방법은 제공하지 않는다.
     * 줄이고 싶다면 topic 자체를 삭제하는 것 말고는 방법이 없다.
+
+### offset과 message 순서
+* offset
+  * partition마다 메시지가 저장되는 위치.
+  * partition 내에서 순차적으로 unique하게 증가하는 숫자 형태로서 동일 partition 내 message의 순서를 보장해준다.
+  * Consumer는 message를 가져올 때마다 offset 정보를 commit함으로써 기존에 어디 위치까지 가져왔는지 알 수 있게 된다.
+
+### partition과 message 순서
+* partition을 여러개 지정할 경우
+  * Producer가 message를 보낼 때 partition이 여러개인 경우 message는 각각의 partition으로 순차적으로 배분한다. (Round-robin 방식)
+  * message의 순서는 오로지 동일 partition 내 offset을 기준으로만 보장된다.
+  * 여러개의 partition을 사용할 경우 동일 partition 내에서는 순서가 보장되지만, partition과 partition 사이에서는 순서를 보장하지 못하기 때문에 전체 message를 출력할 경우 순서가 섞일 수 있다.
+  * 전체 message의 순서를 보장하고 싶은 경우 partition을 1개로만 설정
+    * 이 경우, partition이 하나이므로 분산 처리가 불가능
+
+### Replication
+![image](https://user-images.githubusercontent.com/62865808/166154138-4345311a-e02f-4556-b032-fcf1a34269c8.png)
+
+* 고가용성 및 데이터 유실을 막기 위해 Replication을 수행한다.
+* Replication 그룹 내 동기화 및 신뢰성을 유지한다.
+* Follower는 Read/Write 권한이 없고 오로지 reader로부터 데이터를 복제하기 때문에 특정 Follower가 down되서 Replication을 못할 경우 동기화 문제가 발생한다.
+* 문제가 감지된 Follower 즉, 설정된 일정주기(replica.lag.time.max.ms)만큼 요청이 오지 않는 팔로워는 ISR 그룹에서 추방된다.
+
+### Consumer Group
+* Consumer가 message를 소비하는 시간보다 Producer가 message를 전달하는 속도가 더 빨라서 message가 점점 쌓일 경우를 대비한다.
+* 동일 topic에 대해 여러 Consumer가 message를 가져갈 수 있도록 Consumer Group이라는 기능을 제공한다.
+* 하나의 Consumer가 Producer의 message 전송 속도를 따라가지 못할 경우
+![image](https://user-images.githubusercontent.com/62865808/166154307-97279688-5edd-468b-a1ab-6eb90613dd02.png)
+
+* Consumer를 확장하여 하나의 partition 당 하나의 Consumer가 연결되도록 할 수 있다. (rebalance)
+![image](https://user-images.githubusercontent.com/62865808/166154340-0671ec56-c71a-48de-9442-8141683bb4af.png)
+
+* 하나의 partition 당 하나의 Consumer가 1:1 연결되어야 하므로 아래와 같이 확장할 수는 없다.
+![image](https://user-images.githubusercontent.com/62865808/166154373-b270ceea-d18e-409a-a35d-de32e032168f.png)
+
+* Consumer Group은 Consumer가 일정한 주기로 하는 HeartBeat(Consumer가 poll하거나 message의 offset을 commit할때 보냄)를 통해 Consumer가 message를 처리하고 있다는 것을 인지하며, 만약 오랫동안 HeartBeat가 없다면 해당 Consumer의 session이 Timeout되고 rebalance를 수행한다.
+* Kafka의 Message Queue System은 큐에서 message를 가져가도 사라지지 않기 때문에 여러 Consumer 그룹이 동일 topic에 붙을 수 있다.
+[Kafka Quickstart](https://kafka.apache.org/quickstart)
+[카프카 설치 및 실행 관련 블로그](https://velog.io/@qlgks1/2%EC%9E%A5.%EC%B9%B4%ED%94%84%EC%B9%B4-%EC%84%A4%EC%B9%98%EC%99%80-%EC%8B%A4%ED%96%89)
+[카프카 기본 개념 설명 영상](https://www.youtube.com/watch?v=waw0XXNX-uQ)
+
+### Reference
+[아파치 카프카란 무엇인가](https://velog.io/@jaehyeong/Apache-Kafka%EC%95%84%ED%8C%8C%EC%B9%98-%EC%B9%B4%ED%94%84%EC%B9%B4%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80)
+[KafKa란?](https://velog.io/@qlgks1/0%EC%9E%A5.-%EC%B9%B4%ED%94%84%EC%B9%B4Kafka%EB%9E%80)
+[Message Queue](https://steady-snail.tistory.com/165)
