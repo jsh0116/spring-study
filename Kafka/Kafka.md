@@ -126,11 +126,12 @@
 
 * Consumer Group은 Consumer가 일정한 주기로 하는 HeartBeat(Consumer가 poll하거나 message의 offset을 commit할때 보냄)를 통해 Consumer가 message를 처리하고 있다는 것을 인지하며, 만약 오랫동안 HeartBeat가 없다면 해당 Consumer의 session이 Timeout되고 rebalance를 수행한다.
 * Kafka의 Message Queue System은 큐에서 message를 가져가도 사라지지 않기 때문에 여러 Consumer 그룹이 동일 topic에 붙을 수 있다.
-[Kafka Quickstart](https://kafka.apache.org/quickstart)
-[카프카 설치 및 실행 관련 블로그](https://velog.io/@qlgks1/2%EC%9E%A5.%EC%B9%B4%ED%94%84%EC%B9%B4-%EC%84%A4%EC%B9%98%EC%99%80-%EC%8B%A4%ED%96%89)
-[카프카 기본 개념 설명 영상](https://www.youtube.com/watch?v=waw0XXNX-uQ)
+
+[Kafka Quickstart](https://kafka.apache.org/quickstart)<br/>
+[카프카 설치 및 실행 관련 블로그](https://velog.io/@qlgks1/2%EC%9E%A5.%EC%B9%B4%ED%94%84%EC%B9%B4-%EC%84%A4%EC%B9%98%EC%99%80-%EC%8B%A4%ED%96%89)<br/>
+[카프카 기본 개념 설명 영상](https://www.youtube.com/watch?v=waw0XXNX-uQ)<br/>
 
 ### Reference
-[아파치 카프카란 무엇인가](https://velog.io/@jaehyeong/Apache-Kafka%EC%95%84%ED%8C%8C%EC%B9%98-%EC%B9%B4%ED%94%84%EC%B9%B4%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80)
-[KafKa란?](https://velog.io/@qlgks1/0%EC%9E%A5.-%EC%B9%B4%ED%94%84%EC%B9%B4Kafka%EB%9E%80)
+[아파치 카프카란 무엇인가](https://velog.io/@jaehyeong/Apache-Kafka%EC%95%84%ED%8C%8C%EC%B9%98-%EC%B9%B4%ED%94%84%EC%B9%B4%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80)<br/>
+[KafKa란?](https://velog.io/@qlgks1/0%EC%9E%A5.-%EC%B9%B4%ED%94%84%EC%B9%B4Kafka%EB%9E%80)<br/>
 [Message Queue](https://steady-snail.tistory.com/165)
