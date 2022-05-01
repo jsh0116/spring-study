@@ -71,8 +71,8 @@
 
 ### Topic
 * message를 논리적으로 묶은 개념
- * DB Table 및 File System의 폴더와 유사한 개념
- * Producer가 message를 보낼 경우 Topic에 message가 저장
+ - DB Table 및 File System의 폴더와 유사한 개념
+ - Producer가 message를 보낼 경우 Topic에 message가 저장
 
 ![image](https://user-images.githubusercontent.com/62865808/166153510-934454bc-83ba-4602-b938-e508770b89df.png)
 
@@ -83,11 +83,11 @@
 * 여러개의 Producer에서 한개의 partition으로 message를 보낼 경우 병목 현상이 발생하고, message의 순서를 보장할 수 없게 된다.
 * partition을 여러개로 늘리고 그 수만큼 producer도 늘려 하나의 partition마다 하나의 producer message를 받으면 빠르다.
 * partition이 무작정 많아질 경우
- * File handler 낭비가 존재한다.
-  * 각 partition은 Broker의 Directory와 mapping되고 저장되는 데이터마다 2개의 파일(index, 실제 파일)이 있기 때문에 많은 file handle이 발생할 경우 resource가 낭비된다.
- * 장애 복구 시간이 증가할 수 있다.
-  * Kafka는 Replication을 지원하고, 이를 통해 지속적으로 Leader Partition을 Follower Partition으로 Replication하게된다.
-  * partition 수가 너무 많을 경우 Replication 수행이 느려져 장애복구시간이 증가할 수 있다.
- * partition 수를 줄이는 것은 불가능하다.
-  * Kafka에서 partition 수를 늘리는 것은 아무때나 가능하지만 partition 수를 줄이는 방법은 제공하지 않는다.
-  * 줄이고 싶다면 topic 자체를 삭제하는 것 말고는 방법이 없다.
+ - File handler 낭비가 존재한다.
+  + 각 partition은 Broker의 Directory와 mapping되고 저장되는 데이터마다 2개의 파일(index, 실제 파일)이 있기 때문에 많은 file handle이 발생할 경우 resource가 낭비된다.
+ - 장애 복구 시간이 증가할 수 있다.
+  + Kafka는 Replication을 지원하고, 이를 통해 지속적으로 Leader Partition을 Follower Partition으로 Replication하게된다.
+  + partition 수가 너무 많을 경우 Replication 수행이 느려져 장애복구시간이 증가할 수 있다.
+ - partition 수를 줄이는 것은 불가능하다.
+  + Kafka에서 partition 수를 늘리는 것은 아무때나 가능하지만 partition 수를 줄이는 방법은 제공하지 않는다.
+  + 줄이고 싶다면 topic 자체를 삭제하는 것 말고는 방법이 없다.
