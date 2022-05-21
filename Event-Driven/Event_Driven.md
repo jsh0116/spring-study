@@ -41,7 +41,7 @@
 // e.g.
 {
   "specversion" : "1.0",
-	"type": "/com.example.someevent",
+  "type": "/com.example.someevent",
 	"source": "/mycontext",
 	"id": "E000-0000-0000",
 	"time": "2022-02-20T01:00:00Z",
