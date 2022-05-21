@@ -36,3 +36,5 @@ on은 이벤트를 구독하는 방식이고, emit은 이벤트를 보내는 방
 [Event Driven Architecture & Thread](https://velog.io/@limprove89/%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EA%B8%B0%EB%B0%98-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%93%B0%EB%A0%88%EB%93%9C)
 
 ![image](https://user-images.githubusercontent.com/62865808/169644008-a220489d-048d-43a0-bc54-f4885543c3af.png)
+
+[![SPRING CAMP 2018](http://img.youtube.com/vi/Dn5irt7bClM/0.jpg)](https://youtu.be/Dn5irt7bClM?t=0s)
