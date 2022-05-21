@@ -42,17 +42,17 @@
 {
   "specversion" : "1.0",
   "type": "/com.example.someevent",
-	"source": "/mycontext",
-	"id": "E000-0000-0000",
-	"time": "2022-02-20T01:00:00Z",
-	"comexampleextension1": "value",
-	"comexampleothervalue": 5,
-	"datacontenttype": "application/json",
-	"data": {
-		"appinfoA": "abc",
-		"appinfoB": 123,
-		"appinfoC": true
-	}
+  "source": "/mycontext",
+  "id": "E000-0000-0000",
+  "time": "2022-02-20T01:00:00Z",
+  "comexampleextension1": "value",
+  "comexampleothervalue": 5,
+  "datacontenttype": "application/json",
+  "data": {
+    "appinfoA": "abc",
+    "appinfoB": 123,
+    "appinfoC": true
+  }
 }
 ```
 
