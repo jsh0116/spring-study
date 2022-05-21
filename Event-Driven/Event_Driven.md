@@ -55,5 +55,6 @@
 	}
 }
 ```
+
 * `다양한 Event 형식 지원`: JSON, Avro, Parquet 등의 serialize 형식을 사용할 수 있다.
 * `Event 처리 관련 병목 현상`: message의 형식이 문제를 발생시키기보다 message를 수신하는 Sysmtem 혹은 System 저장소 레벨이 문제를 발생시킨다.
